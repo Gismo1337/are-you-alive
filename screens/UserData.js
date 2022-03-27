@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Alert, Text, StyleSheet, View } from 'react-native';
+import { Alert, Text, Share, StyleSheet, View } from 'react-native';
 import { Button, Checkbox, RadioButton, TextInput } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { __handleStatusUpdate } from '../service/Firebase';
@@ -33,6 +33,26 @@ export default function UserData() {
     }, [])
 
 
+    const onShare = async () => {
+        try {
+            const result = await Share.share({
+                message: id,
+            });
+            if (result.action === Share.sharedAction) {
+                if (result.activityType) {
+                    // shared with activity type of result.activityType
+                } else {
+                    // shared
+                }
+            } else if (result.action === Share.dismissedAction) {
+                // dismissed
+            }
+        } catch (error) {
+            alert(error.message);
+        }
+    };
+
+
     return (
 
         <View style={styles.container}>
@@ -44,6 +64,15 @@ export default function UserData() {
             {/* TODO: SHOW / HIDE THE PIN AREA */}
             <Text>Your PIN: 312452</Text>
             <Text>NEVER SHARE THIS PIN!</Text>
+
+            <Button
+                icon="share-variant"
+                mode="contained"
+                onPress={() => {
+                    onShare()
+                }}>
+                share my id
+            </Button>
 
             <Button
                 icon="form-textbox-password"
