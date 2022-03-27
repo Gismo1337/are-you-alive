@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "are-you-alive",
+    "slug": "are-you-alive",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
