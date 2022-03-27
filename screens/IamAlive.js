@@ -143,7 +143,8 @@ export default function IamAlive() {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        marginHorizontal: 20,
     },
     horizontalView: {
         flexDirection: 'row',

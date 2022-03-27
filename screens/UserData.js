@@ -116,6 +116,7 @@ export default function UserData() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        marginHorizontal: 20,
     },
     horizontalView: {
         flexDirection: 'row',

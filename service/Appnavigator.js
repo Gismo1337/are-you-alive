@@ -15,7 +15,7 @@ export default function Appnavigator() {
     return (
         <NavigationContainer>
 
-            <PaperProvider>
+            <PaperProvider >
 
                 <Tab.Navigator
                     screenOptions={({ route }) => ({
@@ -46,14 +46,6 @@ export default function Appnavigator() {
     );
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-});
 
 
 
