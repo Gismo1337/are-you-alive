@@ -1,11 +1,14 @@
 import React, { useEffect } from "react";
-import { Alert, Text, Share, StyleSheet, View } from 'react-native';
+import { Alert, Text, TouchableWithoutFeedback, Share, StyleSheet, View } from 'react-native';
 import { Button, Checkbox, RadioButton, TextInput } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { __handleStatusUpdate } from '../service/Firebase';
 import uuid from 'react-native-uuid';
 
 export default function UserData() {
+
+    const [showPIN, setShowPIN] = React.useState(false);
+    const [userPIN, setUserPIN] = React.useState("013370");
 
     const [id, setID] = React.useState("");
 
@@ -56,14 +59,24 @@ export default function UserData() {
     return (
 
         <View style={styles.container}>
-            {/* TODO: SHOW DYNAMIC DATA HOW MUCH FIRENDS ARE WAITING FOR AWNSER! */}
-            <Text>1382 People your status</Text>
-            {/* TODO: MAKE USER ID TO SOCIAL MEDIA SHARE! */}
             <Text>Your ID: {id}</Text>
             <Text>Share this ID with your friends and family</Text>
-            {/* TODO: SHOW / HIDE THE PIN AREA */}
-            <Text>Your PIN: 312452</Text>
-            <Text>NEVER SHARE THIS PIN!</Text>
+
+            {showPIN && <View style={styles.horizontalView}>
+                <Text>Your PIN: ******</Text>
+                <TouchableWithoutFeedback onPress={() => setShowPIN(!showPIN)}>
+                    <Text style={styles.link}> - show -</Text>
+                </TouchableWithoutFeedback>
+            </View>}
+
+            {!showPIN && <View style={styles.horizontalView}>
+                <Text>Your PIN: {userPIN}</Text>
+                <TouchableWithoutFeedback onPress={() => setShowPIN(!showPIN)}>
+                    <Text style={styles.link}> - hide -</Text>
+                </TouchableWithoutFeedback>
+            </View>}
+
+            <Text>NEVER SHARE YOUR PIN!</Text>
 
             <Button
                 icon="share-variant"
@@ -102,11 +115,15 @@ export default function UserData() {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
     },
     horizontalView: {
         flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: 'space-between',
+    },
+    link: {
+        color: 'blue',
     }
 
 });
