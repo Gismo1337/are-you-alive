@@ -47,7 +47,7 @@ const __handleGetStatus = async (id) => {
             alert('Status: ' + '\n' + response.status + '\n' + '\n' + 'Message: ' + '\n' + response.message + '\n' + '\n' + 'Last Update: ' + '\n' + date);
         } else {
             // doc.data() will be undefined in this case
-            console.log("No such document!");
+            alert("No such document!");
         }
     } catch (e) {
         // clear error
