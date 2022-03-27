@@ -49,6 +49,26 @@ export default function IamAlive() {
         }
     }
 
+
+    const handleStatusUpdate = async () => {
+        try {
+            // GET FIREBASE
+            const value = await AsyncStorage.getItem('@id')
+            // IF ID IN DATABASE
+            if (value !== null) {
+                // check PIN if OK >>
+                //    save msg
+                // save status
+                // save location check
+                // save timestamp
+            } else {
+                // SET ALL NEW
+            }
+        } catch (e) {
+            // error reading value
+        }
+    }
+
     // load the user id from local storage on first start
     useEffect(() => {
         getData()
