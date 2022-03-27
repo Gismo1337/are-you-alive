@@ -5,21 +5,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function AreYouAlive() {
     const [id, setID] = React.useState("");
-    const [locationAccepted, setLocationAccepted] = React.useState(false);
-    const [value, setValue] = React.useState('first');
 
-    const getData = async () => {
-        try {
-            const value = await AsyncStorage.getItem('@storage_Key')
-            if (value !== null) {
-                // value previously stored
-                console.log(value);
-            }
-        } catch (e) {
-            // error reading value
-        }
-    }
 
+    // ONLY FOR DEVELOPMENT
     const clearAll = async () => {
         try {
             await AsyncStorage.clear()
@@ -27,15 +15,13 @@ export default function AreYouAlive() {
             // clear error
         }
 
-        console.log('Done.')
+        console.log('Local Storage deleted.')
     }
 
 
     return (
         <View style={styles.container}>
 
-
-            <Text>{id}</Text>
             <Text>Check the status of a friend or familymember</Text>
 
 
@@ -47,11 +33,11 @@ export default function AreYouAlive() {
 
 
 
-            <Button icon="account-question-outline" mode="contained" onPress={() => getData('keyhere')}>
+            <Button icon="account-question-outline" mode="contained" onPress={() => console.log('asd')}>
                 Are you alive?
             </Button>
             <Button icon="account-question-outline" mode="contained" onPress={() => clearAll()}>
-                delete locat
+                delete local storage
             </Button>
 
         </View>
