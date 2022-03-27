@@ -1,6 +1,26 @@
-# are-you-alive
+
+ # are-you-alive
+
+Are you alive is an app to share your body status to friends and family members.
+We do not collect you connection data. We do not collect your location.
 
 
+
+
+## Requirements
+
+[Expo](https://docs.expo.dev/)
+ 
+
+## Installation
+
+### Download the project
+
+```bash
+  git clone https://github.com/Gismo1337/are-you-alive.git
+  cd are-you-alive
+  npm install  
+```
 
 ### Add Firebase Database
 
@@ -18,5 +38,55 @@ MEASUREMENT_ID=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 DATABASE_URL=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 ```
 
-Start sever with clean cache by running:
+(Re)Start server with clean cache by running:
 `expo start -c`
+## Contributing
+
+Contributions are always welcome!
+
+Fork, Create branch, push, open PR
+
+
+## Roadmap
+
+- Additional browser support
+
+- Push Notifications
+
+- Smartphone Widget
+
+
+## Authors
+
+- [@gismo1337](https://www.github.com/gismo1337)
+
+
+## Documentation
+
+Not available
+
+
+## FAQ
+
+#### Do you collect location, connection or personal data?
+
+No. 
+
+#### Where do you store the status data?
+
+Google Firebase Database
+
+
+## 🔗 Links
+[![devto](https://img.shields.io/badge/dev.to-000?style=for-the-badge&logo=dev.to&logoColor=white)](https://dev.to/gismo1337)
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/sebastianrichter1337/)
+[![youtube](https://img.shields.io/badge/youtube-f70025?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/gismo1337dev)
+[![expo](https://img.shields.io/badge/expo-000000?style=for-the-badge&logo=expo&logoColor=white)](https://expo.dev/@g1sm0?tab=snacks)
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
+## Support
+
+Expect us.
+

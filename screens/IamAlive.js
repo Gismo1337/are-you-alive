@@ -30,10 +30,6 @@ export default function IamAlive() {
         setID(userID);
         storeData(userID);
         console.log('UserID created: ' + userID);
-
-
-
-
     }
 
     // get user id from local storage
