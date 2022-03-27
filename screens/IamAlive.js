@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Text, StyleSheet, View } from 'react-native';
+import { Alert, Text, StyleSheet, View } from 'react-native';
 import { Button, Checkbox, RadioButton, TextInput } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { __handleStatusUpdate } from '../service/Firebase';
@@ -50,26 +50,6 @@ export default function IamAlive() {
         }
     }
 
-
-    // const handleStatusUpdate = async () => {
-    //     try {
-    //         // GET FIREBASE
-    //         const value = await AsyncStorage.getItem('@id')
-    //         // IF ID IN DATABASE
-    //         if (value !== null) {
-    //             // check PIN if OK >>
-    //             //    save msg
-    //             // save status
-    //             // save location check
-    //             // save timestamp
-    //         } else {
-    //             // SET ALL NEW
-    //         }
-    //     } catch (e) {
-    //         // error reading value
-    //     }
-    // }
-
     // load the user id from local storage on first start
     useEffect(() => {
         getData()
@@ -77,15 +57,8 @@ export default function IamAlive() {
 
 
     return (
+
         <View style={styles.container}>
-            {/* TODO: SHOW DYNAMIC DATA HOW MUCH FIRENDS ARE WAITING FOR AWNSER! */}
-            <Text>1382 People your status</Text>
-            {/* TODO: MAKE USER ID TO SOCIAL MEDIA SHARE! */}
-            <Text>Your ID: {id}</Text>
-            <Text>Share this ID with your friends and family</Text>
-            {/* TODO: SHOW / HIDE THE PIN AREA */}
-            <Text>Your PIN: 312452</Text>
-            <Text>NEVER SHARE THIS PIN!</Text>
 
             <TextInput
                 label="Message"
@@ -129,9 +102,39 @@ export default function IamAlive() {
                 <Text>I DO NOT POST MY LOCATION!</Text>
             </View>
 
-            <Button icon="account-convert-outline" mode="contained" onPress={() => __handleStatusUpdate(id, msg, value)}>
-                Update status
-            </Button>
+            {/* FIXME: CHANGE CONDITIONAL RENDERING */}
+            {locationAccepted ?
+                <Button
+                    icon="account-convert-outline"
+                    mode="contained"
+                    onPress={() => {
+
+                        Alert.alert('Send status?', 'Status: ' + '\n' + value + '\n' + '\n' + 'Message: ' + '\n' + msg, [
+                            {
+                                text: 'Cancel',
+                                onPress: () => console.log('Cancel Pressed'),
+                                style: 'cancel',
+                            },
+                            {
+                                text: 'OK', onPress: () => {
+                                    __handleStatusUpdate(id, msg, value)
+                                    setMSG("")
+                                }
+                            },
+                        ]);
+
+
+                    }}>
+                    Update status
+                </Button> :
+                <Button
+                    disabled
+                    icon="account-convert-outline"
+                    mode="contained"
+                >
+                    Update status
+                </Button>}
+
 
         </View>
     );
