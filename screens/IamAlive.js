@@ -61,6 +61,10 @@ export default function IamAlive() {
         <View style={styles.container}>
             <Text>BE CAREFUL WITH YOUR INFORMATION! NEVER SEND YOUR LOCATION IF YOUR ARE IN A WARZONE!</Text>
             <TextInput
+                multiline
+                numberOfLines={4}
+                maxLength={255}
+                maxHeight={110}
                 label="Message"
                 value={msg}
                 onChangeText={msg => setMSG(msg)}
@@ -99,7 +103,7 @@ export default function IamAlive() {
                         setLocationAccepted(!locationAccepted);
                     }}
                 />
-                <Text>I DO NOT POST MY LOCATION!</Text>
+                <Text>I AGREE TO SEND MY DATA!</Text>
             </View>
 
             {/* FIXME: CHANGE CONDITIONAL RENDERING */}
