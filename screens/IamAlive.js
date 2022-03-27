@@ -3,6 +3,7 @@ import { Text, StyleSheet, View } from 'react-native';
 import { Button, Checkbox, RadioButton, TextInput } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { __handleStatusUpdate } from '../service/Firebase';
+import uuid from 'react-native-uuid';
 
 export default function IamAlive() {
     // save the user message
@@ -25,10 +26,14 @@ export default function IamAlive() {
 
     // create a unique id for each user
     function createID() {
-        const userID = Math.floor(Math.random() * 1000000000).toString();
+        const userID = uuid.v4();
         setID(userID);
         storeData(userID);
-        console.log(userID);
+        console.log('UserID created: ' + userID);
+
+
+
+
     }
 
     // get user id from local storage

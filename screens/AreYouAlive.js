@@ -5,14 +5,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import __handleGetStatus from '../service/Firebase';
 
 // ONLY FOR DEVELOPMENT
-// const clearAll = async () => {
-//     try {
-//         await AsyncStorage.clear()
-//         console.log('Local Storage deleted.')
-//     } catch (e) {
-//         // clear error
-//     }
-// }
+const clearAll = async () => {
+    try {
+        await AsyncStorage.clear()
+        console.log('Local Storage deleted.')
+    } catch (e) {
+        // clear error
+    }
+}
 
 export default function AreYouAlive() {
 
@@ -36,9 +36,9 @@ export default function AreYouAlive() {
                 Are you alive?
             </Button>
 
-            {/* <Button icon="account-question-outline" mode="contained" onPress={() => clearAll()}>
+            <Button icon="account-question-outline" mode="contained" onPress={() => clearAll()}>
                 delete local storage
-            </Button> */}
+            </Button>
 
         </View>
     );
