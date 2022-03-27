@@ -59,7 +59,7 @@ export default function IamAlive() {
     return (
 
         <View style={styles.container}>
-
+            <Text>BE CAREFUL WITH YOUR INFORMATION! NEVER SEND YOUR LOCATION IF YOUR ARE IN A WARZONE!</Text>
             <TextInput
                 label="Message"
                 value={msg}
