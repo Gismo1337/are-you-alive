@@ -1,14 +1,16 @@
 import React, { useEffect } from "react";
 import { Alert, Text, TouchableWithoutFeedback, Share, StyleSheet, View } from 'react-native';
-import { Button, Checkbox, RadioButton, TextInput } from 'react-native-paper';
+import { Button } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { __handleStatusUpdate } from '../service/Firebase';
-import uuid from 'react-native-uuid';
+
+import CountDown from 'react-native-countdown-component';
 
 export default function UserData({ navigation }) {
 
     const [showPIN, setShowPIN] = React.useState(false);
     const [userPIN, setUserPIN] = React.useState("013370");
+
 
     const [id, setID] = React.useState("");
 
@@ -16,11 +18,12 @@ export default function UserData({ navigation }) {
     const getData = async () => {
         try {
             const value = await AsyncStorage.getItem('@id')
+
+
             if (value !== null) {
                 // Check if the user id is already stored in local storage
                 // Store the user id in state
                 setID(value)
-                console.log(value);
             } else {
                 // Create a new user id if not in local storage
                 console.log('keine id vorhanden - warnung und dann routing auf send status')
@@ -58,23 +61,31 @@ export default function UserData({ navigation }) {
 
 
 
-
-
     return (
 
         <View style={styles.container}>
-            <Text style={styles.timerTitle}>Status delete: </Text>
-            <Text style={styles.countdown}>{day} days {hour} hours {min} min {sec} sec</Text>
+            {/* <Text style={styles.timerTitle}>Status delete: </Text> */}
 
-            <Button
+            {/* {showCounter && <CountDown
+                until={countdownTimestamp}
+                onFinish={() => alert('finished')}
+                onPress={() => alert('hello')}
+                size={20}
+            />} */}
+
+
+            {/* <Button
                 style={styles.button}
                 icon="account-convert-outline"
                 mode="contained"
                 onPress={() => {
                     navigation.navigate('Send status')
                 }}>
-                update
-            </Button>
+                update status
+            </Button> */}
+
+
+
             <Text>Your ID: {id}</Text>
             <Text style={styles.note}>Only share your ID with trusted people</Text>
 
@@ -88,25 +99,27 @@ export default function UserData({ navigation }) {
                 share my id
             </Button>
 
-            {!showPIN && <View style={styles.horizontalView}>
+
+            {/* TODO: LATER USE. PROTECT STATUS UPDATE WITHOUT PIN */}
+
+            {/* {!showPIN && <View style={styles.horizontalView}>
                 <Text>Your PIN: ******</Text>
                 <TouchableWithoutFeedback onPress={() => setShowPIN(!showPIN)}>
                     <Text style={styles.link}> - show -</Text>
                 </TouchableWithoutFeedback>
-            </View>}
+            </View>} */}
 
-            {showPIN && <View style={styles.horizontalView}>
+            {/* {showPIN && <View style={styles.horizontalView}>
                 <Text>Your PIN: {userPIN}</Text>
                 <TouchableWithoutFeedback onPress={() => setShowPIN(!showPIN)}>
                     <Text style={styles.link}> - hide -</Text>
                 </TouchableWithoutFeedback>
             </View>}
 
-            <Text style={styles.note}>Don't share your Pin with anyone</Text>
+            <Text style={styles.note}>Don't share your Pin with anyone</Text> */}
 
-
-
-            <Button
+            {/* TODO: MAKE PIN EDITABLE */}
+            {/* <Button
                 style={styles.button}
                 icon="form-textbox-password"
                 mode="contained"
@@ -114,7 +127,14 @@ export default function UserData({ navigation }) {
                     alert('EDIT YOUR PIN NOW')
                 }}>
                 change pin
-            </Button>
+            </Button> */}
+
+
+
+
+
+
+
 
             {/* TODO: DELETE .>> DEVELOPMENT ONLY */}
             {/* <Button

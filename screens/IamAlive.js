@@ -17,20 +17,23 @@ export default function IamAlive() {
     const [id, setID] = React.useState("");
 
     // store user id in local storage
-    const storeData = async (value) => {
+    const storeData = async (key, value) => {
         try {
-            await AsyncStorage.setItem('@id', value);
+            await AsyncStorage.setItem(key, value);
         } catch (e) {
             // saving error
         }
     }
 
-    // create a unique id for each user
+    // create a unique id for each user &
     function createID() {
         const userID = uuid.v4();
+        // set key for locale storage
+        const key = '@id';
+        // use state userID
         setID(userID);
-        storeData(userID);
-        console.log('UserID created: ' + userID);
+        // trigger local storage 
+        storeData(key, userID);
     }
 
     // get user id from local storage
@@ -41,7 +44,6 @@ export default function IamAlive() {
                 // Check if the user id is already stored in local storage
                 // Store the user id in state
                 setID(value)
-                console.log(value);
             } else {
                 // Create a new user id if not in local storage
                 createID()
@@ -50,7 +52,6 @@ export default function IamAlive() {
             // error reading value
         }
     }
-
 
     // load the user id from local storage on first start
     useEffect(() => {
@@ -65,28 +66,37 @@ export default function IamAlive() {
             <RadioButton.Group onValueChange={newValue => setValue(newValue)} value={value}>
                 <View style={styles.statusIconsRow}>
                     <View style={styles.statusIcons}>
-                        <Text>Trouble</Text>
-                        <FontAwesome5 name='sad-cry' size={50} />
+
+                        <Text>In trouble</Text>
+                        <TouchableWithoutFeedback onPress={() => setValue("++")}>
+                            <FontAwesome5 name='sad-cry' size={50} />
+                        </TouchableWithoutFeedback>
                         <RadioButton value="++" />
 
                     </View>
                     <View style={styles.statusIcons}>
-                        <Text>Shelter</Text>
-                        <FontAwesome5 name='frown' size={50} />
+                        <Text>Got shelter</Text>
+                        <TouchableWithoutFeedback onPress={() => setValue("+")}>
+                            <FontAwesome5 name='frown' size={50} />
+                        </TouchableWithoutFeedback>
                         <RadioButton value="+" />
 
                     </View>
 
                     <View style={styles.statusIcons}>
                         <Text>On my way</Text>
-                        <FontAwesome5 name='meh' size={50} />
+                        <TouchableWithoutFeedback onPress={() => setValue("-")}>
+                            <FontAwesome5 name='meh' size={50} />
+                        </TouchableWithoutFeedback>
                         <RadioButton value="-" />
 
                     </View>
 
                     <View style={styles.statusIcons}>
-                        <Text>Save</Text>
-                        <FontAwesome5 name='laugh' size={50} />
+                        <Text>I'm save</Text>
+                        <TouchableWithoutFeedback onPress={() => setValue("--")}>
+                            <FontAwesome5 name='laugh' size={50} />
+                        </TouchableWithoutFeedback>
                         <RadioButton value="--" />
 
                     </View>
@@ -110,7 +120,20 @@ export default function IamAlive() {
                         if (locationAccepted) {
                             setLocationAccepted(false)
                         } else {
-                            alert("You didn't read the terms of use!");
+                            Alert.alert('Terms of Use',
+                                "We do not collect any personal, connection or location data. You are responsible for the content of the message.",
+                                [
+                                    {
+                                        text: 'decline',
+                                        onPress: () => setLocationAccepted(false),
+                                        style: 'cancel',
+                                    },
+                                    {
+                                        text: 'Accept', onPress: () => {
+                                            setLocationAccepted(true);
+                                        }
+                                    },
+                                ]);
                         }
 
                     }}
@@ -119,18 +142,20 @@ export default function IamAlive() {
 
                 {/* SHOW ALERT WITH THE TERMS OF USE */}
                 <TouchableWithoutFeedback onPress={() => {
-                    Alert.alert('Terms of Use', "We do not collect any personal, connection or location data. You are responsible for the content of the message. If you don't update your status, it will be deleted after 72 hours automatically.", [
-                        {
-                            text: 'decline',
-                            onPress: () => setLocationAccepted(false),
-                            style: 'cancel',
-                        },
-                        {
-                            text: 'Accept', onPress: () => {
-                                setLocationAccepted(true);
-                            }
-                        },
-                    ]);
+                    Alert.alert('Terms of Use',
+                        "We do not collect any personal, connection or location data. You are responsible for the content of the message.",
+                        [
+                            {
+                                text: 'decline',
+                                onPress: () => setLocationAccepted(false),
+                                style: 'cancel',
+                            },
+                            {
+                                text: 'Accept', onPress: () => {
+                                    setLocationAccepted(true);
+                                }
+                            },
+                        ]);
                 }}>
                     <Text style={styles.link}>Terms of Use </Text>
                 </TouchableWithoutFeedback>
@@ -169,6 +194,8 @@ export default function IamAlive() {
                     >
                         Update status
                     </Button>
+
+
             }
 
 
