@@ -3,7 +3,6 @@ import { doc, getDoc, getFirestore, setDoc } from 'firebase/firestore';
 import { LogBox } from 'react-native';
 LogBox.ignoreLogs(['Setting a timer']);
 
-
 // Initialize Firebase from .env file
 const firebaseConfig = {
     apiKey: process.env.API_KEY,
@@ -33,7 +32,6 @@ const __handleStatusUpdate = async (id, msg, value) => {
     } catch (e) {
         // clear error
     }
-
 }
 
 // Get the user status from database and return the status
@@ -52,7 +50,6 @@ const __handleGetStatus = async (id) => {
     } catch (e) {
         // clear error
     }
-
 }
 
 export default __handleGetStatus

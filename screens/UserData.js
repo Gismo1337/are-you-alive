@@ -4,14 +4,13 @@ import { Button } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { __handleStatusUpdate } from '../service/Firebase';
 
-import CountDown from 'react-native-countdown-component';
+// import CountDown from 'react-native-countdown-component';
 
 export default function UserData({ navigation }) {
 
-    const [showPIN, setShowPIN] = React.useState(false);
-    const [userPIN, setUserPIN] = React.useState("013370");
-
-
+    // For later use
+    // const [showPIN, setShowPIN] = React.useState(false);
+    // const [userPIN, setUserPIN] = React.useState("013370");
     const [id, setID] = React.useState("");
 
     // get user id from local storage
@@ -38,7 +37,6 @@ export default function UserData({ navigation }) {
         getData()
     }, [])
 
-
     const onShare = async () => {
         try {
             const result = await Share.share({
@@ -57,9 +55,6 @@ export default function UserData({ navigation }) {
             alert(error.message);
         }
     };
-
-
-
 
     return (
 
@@ -84,8 +79,6 @@ export default function UserData({ navigation }) {
                 update status
             </Button> */}
 
-
-
             <Text>Your ID: {id}</Text>
             <Text style={styles.note}>Only share your ID with trusted people</Text>
 
@@ -98,7 +91,6 @@ export default function UserData({ navigation }) {
                 }}>
                 share my id
             </Button>
-
 
             {/* TODO: LATER USE. PROTECT STATUS UPDATE WITHOUT PIN */}
 
@@ -129,32 +121,18 @@ export default function UserData({ navigation }) {
                 change pin
             </Button> */}
 
-
-
-
-
-
-
-
             {/* TODO: DELETE .>> DEVELOPMENT ONLY */}
             {/* <Button
                 icon="refresh"
                 mode="contained"
                 onPress={() => {
-
                     getData()
-
-
                 }}>
                 refresh
             </Button> */}
-
-
-
         </View>
     );
 }
-
 
 const styles = StyleSheet.create({
     container: {
@@ -187,5 +165,4 @@ const styles = StyleSheet.create({
         fontSize: 16,
         textAlign: 'center',
     },
-
 });

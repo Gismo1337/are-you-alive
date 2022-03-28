@@ -10,13 +10,10 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
 
-
 export default function Appnavigator() {
     return (
         <NavigationContainer>
-
             <PaperProvider >
-
                 <Tab.Navigator
                     screenOptions={({ route }) => ({
                         tabBarIcon: ({ focused, color, size }) => {
@@ -39,9 +36,7 @@ export default function Appnavigator() {
                     <Tab.Screen name="Are you alive?" component={AreYouAlive} />
                     <Tab.Screen name="User" component={UserData} />
                 </Tab.Navigator>
-
             </PaperProvider>
-
         </NavigationContainer>
     );
 }
