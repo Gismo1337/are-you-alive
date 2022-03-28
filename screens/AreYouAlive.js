@@ -1,7 +1,6 @@
 import React from "react";
 import { Text, StyleSheet, View } from 'react-native';
 import { Button, TextInput } from 'react-native-paper';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import __handleGetStatus from '../service/Firebase';
 
 // ONLY FOR DEVELOPMENT
@@ -58,7 +57,6 @@ export default function AreYouAlive() {
     );
 }
 
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -77,5 +75,4 @@ const styles = StyleSheet.create({
     button: {
         marginTop: 10,
     },
-
 });

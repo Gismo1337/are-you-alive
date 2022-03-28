@@ -58,7 +58,6 @@ export default function IamAlive() {
         getData()
     }, [])
 
-
     return (
 
         <View style={styles.container}>
@@ -112,8 +111,11 @@ export default function IamAlive() {
                 value={msg}
                 onChangeText={msg => setMSG(msg)}
             />
+
             <Text style={styles.title}>Please be careful when sharing your location data while in a war zone.</Text>
+
             <View style={styles.horizontalView}>
+
                 <Checkbox
                     status={locationAccepted ? 'checked' : 'unchecked'}
                     onPress={() => {
@@ -194,15 +196,10 @@ export default function IamAlive() {
                     >
                         Update status
                     </Button>
-
-
             }
-
-
         </View >
     );
 }
-
 
 const styles = StyleSheet.create({
     container: {
@@ -219,9 +216,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
     },
     statusIcons: {
-
         alignItems: 'center',
-
     },
     title: {
         marginBottom: 10,
@@ -232,5 +227,4 @@ const styles = StyleSheet.create({
     link: {
         color: 'blue',
     }
-
 });
