@@ -60,25 +60,10 @@ export default function UserData() {
 
         <View style={styles.container}>
             <Text>Your ID: {id}</Text>
-            <Text>Share this ID with your friends and family</Text>
-
-            {showPIN && <View style={styles.horizontalView}>
-                <Text>Your PIN: ******</Text>
-                <TouchableWithoutFeedback onPress={() => setShowPIN(!showPIN)}>
-                    <Text style={styles.link}> - show -</Text>
-                </TouchableWithoutFeedback>
-            </View>}
-
-            {!showPIN && <View style={styles.horizontalView}>
-                <Text>Your PIN: {userPIN}</Text>
-                <TouchableWithoutFeedback onPress={() => setShowPIN(!showPIN)}>
-                    <Text style={styles.link}> - hide -</Text>
-                </TouchableWithoutFeedback>
-            </View>}
-
-            <Text>NEVER SHARE YOUR PIN!</Text>
+            <Text style={styles.note}>Only share your ID with trusted people</Text>
 
             <Button
+                style={styles.button}
                 icon="share-variant"
                 mode="contained"
                 onPress={() => {
@@ -87,7 +72,26 @@ export default function UserData() {
                 share my id
             </Button>
 
+            {!showPIN && <View style={styles.horizontalView}>
+                <Text>Your PIN: ******</Text>
+                <TouchableWithoutFeedback onPress={() => setShowPIN(!showPIN)}>
+                    <Text style={styles.link}> - show -</Text>
+                </TouchableWithoutFeedback>
+            </View>}
+
+            {showPIN && <View style={styles.horizontalView}>
+                <Text>Your PIN: {userPIN}</Text>
+                <TouchableWithoutFeedback onPress={() => setShowPIN(!showPIN)}>
+                    <Text style={styles.link}> - hide -</Text>
+                </TouchableWithoutFeedback>
+            </View>}
+
+            <Text style={styles.note}>Don't share your Pin with anyone</Text>
+
+
+
             <Button
+                style={styles.button}
                 icon="form-textbox-password"
                 mode="contained"
                 onPress={() => {
@@ -97,7 +101,7 @@ export default function UserData() {
             </Button>
 
             {/* TODO: DELETE .>> DEVELOPMENT ONLY */}
-            <Button
+            {/* <Button
                 icon="refresh"
                 mode="contained"
                 onPress={() => {
@@ -107,7 +111,7 @@ export default function UserData() {
 
                 }}>
                 refresh
-            </Button>
+            </Button> */}
         </View>
     );
 }
@@ -125,6 +129,15 @@ const styles = StyleSheet.create({
     },
     link: {
         color: 'blue',
-    }
+    },
+    button: {
+        marginTop: 10,
+        marginBottom: 20,
+    },
+    note: {
+        fontSize: 12,
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
 
 });

@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
-import { Alert, Text, StyleSheet, View } from 'react-native';
+import { Alert, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 import { Button, Checkbox, RadioButton, TextInput } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { __handleStatusUpdate } from '../service/Firebase';
 import uuid from 'react-native-uuid';
+import { FontAwesome5 } from '@expo/vector-icons';
 
 export default function IamAlive() {
     // save the user message
@@ -50,6 +51,7 @@ export default function IamAlive() {
         }
     }
 
+
     // load the user id from local storage on first start
     useEffect(() => {
         getData()
@@ -59,7 +61,38 @@ export default function IamAlive() {
     return (
 
         <View style={styles.container}>
-            <Text>BE CAREFUL WITH YOUR INFORMATION! NEVER SEND YOUR LOCATION IF YOUR ARE IN A WARZONE!</Text>
+
+            <RadioButton.Group onValueChange={newValue => setValue(newValue)} value={value}>
+                <View style={styles.statusIconsRow}>
+                    <View style={styles.statusIcons}>
+                        <Text>Trouble</Text>
+                        <FontAwesome5 name='sad-cry' size={50} />
+                        <RadioButton value="++" />
+
+                    </View>
+                    <View style={styles.statusIcons}>
+                        <Text>Shelter</Text>
+                        <FontAwesome5 name='frown' size={50} />
+                        <RadioButton value="+" />
+
+                    </View>
+
+                    <View style={styles.statusIcons}>
+                        <Text>On my way</Text>
+                        <FontAwesome5 name='meh' size={50} />
+                        <RadioButton value="-" />
+
+                    </View>
+
+                    <View style={styles.statusIcons}>
+                        <Text>Save</Text>
+                        <FontAwesome5 name='laugh' size={50} />
+                        <RadioButton value="--" />
+
+                    </View>
+                </View>
+            </RadioButton.Group>
+
             <TextInput
                 multiline
                 numberOfLines={4}
@@ -69,78 +102,77 @@ export default function IamAlive() {
                 value={msg}
                 onChangeText={msg => setMSG(msg)}
             />
-
-            <RadioButton.Group onValueChange={newValue => setValue(newValue)} value={value}>
-                <View style={styles.horizontalView}>
-
-                    <RadioButton value="++" />
-                    <Text>I am safety for the next days</Text>
-                </View>
-                <View style={styles.horizontalView}>
-
-                    <RadioButton value="+" />
-                    <Text>I am safe for a while</Text>
-                </View>
-
-                <View style={styles.horizontalView}>
-
-                    <RadioButton value="-" />
-                    <Text>I am on my way to safety</Text>
-                </View>
-
-                <View style={styles.horizontalView}>
-
-                    <RadioButton value="--" />
-                    <Text>I am in trouble</Text>
-                </View>
-            </RadioButton.Group>
-
-
+            <Text style={styles.title}>Please be careful when sharing your location data while in a war zone.</Text>
             <View style={styles.horizontalView}>
                 <Checkbox
                     status={locationAccepted ? 'checked' : 'unchecked'}
                     onPress={() => {
-                        setLocationAccepted(!locationAccepted);
+                        if (locationAccepted) {
+                            setLocationAccepted(false)
+                        } else {
+                            alert("You didn't read the terms of use!");
+                        }
+
                     }}
                 />
-                <Text>I AGREE TO SEND MY DATA!</Text>
+                <Text>I accept the </Text>
+
+                {/* SHOW ALERT WITH THE TERMS OF USE */}
+                <TouchableWithoutFeedback onPress={() => {
+                    Alert.alert('Terms of Use', "We do not collect any personal, connection or location data. You are responsible for the content of the message. If you don't update your status, it will be deleted after 72 hours automatically.", [
+                        {
+                            text: 'decline',
+                            onPress: () => setLocationAccepted(false),
+                            style: 'cancel',
+                        },
+                        {
+                            text: 'Accept', onPress: () => {
+                                setLocationAccepted(true);
+                            }
+                        },
+                    ]);
+                }}>
+                    <Text style={styles.link}>Terms of Use </Text>
+                </TouchableWithoutFeedback>
             </View>
 
             {/* FIXME: CHANGE CONDITIONAL RENDERING */}
-            {locationAccepted ?
-                <Button
-                    icon="account-convert-outline"
-                    mode="contained"
-                    onPress={() => {
+            {
+                locationAccepted ?
+                    <Button
+                        icon="account-convert-outline"
+                        mode="contained"
+                        onPress={() => {
 
-                        Alert.alert('Send status?', 'Status: ' + '\n' + value + '\n' + '\n' + 'Message: ' + '\n' + msg, [
-                            {
-                                text: 'Cancel',
-                                onPress: () => console.log('Cancel Pressed'),
-                                style: 'cancel',
-                            },
-                            {
-                                text: 'OK', onPress: () => {
-                                    __handleStatusUpdate(id, msg, value)
-                                    setMSG("")
-                                }
-                            },
-                        ]);
-
-
-                    }}>
-                    Update status
-                </Button> :
-                <Button
-                    disabled
-                    icon="account-convert-outline"
-                    mode="contained"
-                >
-                    Update status
-                </Button>}
+                            Alert.alert('Send status?', 'Status: ' + '\n' + value + '\n' + '\n' + 'Message: ' + '\n' + msg, [
+                                {
+                                    text: 'Cancel',
+                                    onPress: () => console.log('Cancel Pressed'),
+                                    style: 'cancel',
+                                },
+                                {
+                                    text: 'OK', onPress: () => {
+                                        __handleStatusUpdate(id, msg, value)
+                                        setMSG("")
+                                    }
+                                },
+                            ]);
 
 
-        </View>
+                        }}>
+                        Update status
+                    </Button> :
+                    <Button
+                        disabled
+                        icon="account-convert-outline"
+                        mode="contained"
+                    >
+                        Update status
+                    </Button>
+            }
+
+
+        </View >
     );
 }
 
@@ -153,6 +185,25 @@ const styles = StyleSheet.create({
     horizontalView: {
         flexDirection: 'row',
         alignItems: 'center',
+    },
+    statusIconsRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+    },
+    statusIcons: {
+
+        alignItems: 'center',
+
+    },
+    title: {
+        marginBottom: 10,
+        fontSize: 16,
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
+    link: {
+        color: 'blue',
     }
 
 });

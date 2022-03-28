@@ -5,14 +5,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import __handleGetStatus from '../service/Firebase';
 
 // ONLY FOR DEVELOPMENT
-const clearAll = async () => {
-    try {
-        await AsyncStorage.clear()
-        console.log('Local Storage deleted.')
-    } catch (e) {
-        // clear error
-    }
-}
+// const clearAll = async () => {
+//     try {
+//         await AsyncStorage.clear()
+//         console.log('Local Storage deleted.')
+//     } catch (e) {
+//         // clear error
+//     }
+// }
 
 export default function AreYouAlive() {
 
@@ -21,7 +21,7 @@ export default function AreYouAlive() {
     return (
         <View style={styles.container}>
 
-            <Text>Check the status of a friend or familymember</Text>
+            <Text style={styles.title}>Enter the ID of your buddy. Good luck.</Text>
 
             <TextInput
                 label="Enter ID"
@@ -29,16 +29,30 @@ export default function AreYouAlive() {
                 onChangeText={id => setID(id)}
             />
 
-            <Button icon="account-question-outline" mode="contained" onPress={() => {
-                __handleGetStatus(id)
-                setID("")
-            }}>
-                Are you alive?
+            <Button
+                style={styles.button}
+                icon="account-question-outline"
+                mode="contained"
+                onPress={() => {
+                    if (id.length === 36) {
+                        __handleGetStatus(id)
+                        setID("")
+                    } else {
+                        alert("Ooops... Please enter a valid ID.")
+                    }
+
+                }}>
+                Check status
             </Button>
 
-            <Button icon="account-question-outline" mode="contained" onPress={() => clearAll()}>
+            {/* FOR DEVELOPMENT ONLY */}
+            {/* <Button
+                style={styles.button}
+                icon="account-question-outline"
+                mode="contained"
+                onPress={() => clearAll()}>
                 delete local storage
-            </Button>
+            </Button> */}
 
         </View>
     );
@@ -50,9 +64,18 @@ const styles = StyleSheet.create({
         flex: 1,
         marginHorizontal: 20,
     },
+    title: {
+        marginBottom: 10,
+        fontSize: 16,
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
     horizontalView: {
         flexDirection: 'row',
         alignItems: 'center',
-    }
+    },
+    button: {
+        marginTop: 10,
+    },
 
 });
