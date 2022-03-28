@@ -5,7 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { __handleStatusUpdate } from '../service/Firebase';
 import uuid from 'react-native-uuid';
 
-export default function UserData() {
+export default function UserData({ navigation }) {
 
     const [showPIN, setShowPIN] = React.useState(false);
     const [userPIN, setUserPIN] = React.useState("013370");
@@ -56,9 +56,25 @@ export default function UserData() {
     };
 
 
+
+
+
+
     return (
 
         <View style={styles.container}>
+            <Text style={styles.timerTitle}>Status delete: </Text>
+            <Text style={styles.countdown}>{day} days {hour} hours {min} min {sec} sec</Text>
+
+            <Button
+                style={styles.button}
+                icon="account-convert-outline"
+                mode="contained"
+                onPress={() => {
+                    navigation.navigate('Send status')
+                }}>
+                update
+            </Button>
             <Text>Your ID: {id}</Text>
             <Text style={styles.note}>Only share your ID with trusted people</Text>
 
@@ -112,6 +128,9 @@ export default function UserData() {
                 }}>
                 refresh
             </Button> */}
+
+
+
         </View>
     );
 }
@@ -137,6 +156,15 @@ const styles = StyleSheet.create({
     note: {
         fontSize: 12,
         fontWeight: 'bold',
+        textAlign: 'center',
+    },
+    countdown: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
+    timerTitle: {
+        fontSize: 16,
         textAlign: 'center',
     },
 
