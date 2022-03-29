@@ -2,9 +2,17 @@
   "expo": {
     "name": "are-you-alive",
     "slug": "are-you-alive",
-    "version": "1.0.0",
+    "version": "0.0.1",
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "ios": {
+      "bundleIdentifier": "de.gismo1337.areyoualive",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "de.gismo1337.areyoualive",
+      "versionCode": 1
+    }
   }
 }
