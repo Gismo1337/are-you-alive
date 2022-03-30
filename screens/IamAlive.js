@@ -5,6 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { __handleStatusUpdate } from '../service/Firebase';
 import uuid from 'react-native-uuid';
 import { FontAwesome5 } from '@expo/vector-icons';
+import MotionDetection from "../components/MotionDetection.js";
 
 export default function IamAlive() {
     // save the user message
@@ -197,6 +198,9 @@ export default function IamAlive() {
                         Update status
                     </Button>
             }
+
+            <MotionDetection />
+
         </View >
     );
 }

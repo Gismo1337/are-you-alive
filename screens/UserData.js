@@ -4,7 +4,7 @@ import { Button } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { __handleStatusUpdate } from '../service/Firebase';
 
-// import CountDown from 'react-native-countdown-component';
+
 
 export default function UserData({ navigation }) {
 
@@ -59,25 +59,7 @@ export default function UserData({ navigation }) {
     return (
 
         <View style={styles.container}>
-            {/* <Text style={styles.timerTitle}>Status delete: </Text> */}
 
-            {/* {showCounter && <CountDown
-                until={countdownTimestamp}
-                onFinish={() => alert('finished')}
-                onPress={() => alert('hello')}
-                size={20}
-            />} */}
-
-
-            {/* <Button
-                style={styles.button}
-                icon="account-convert-outline"
-                mode="contained"
-                onPress={() => {
-                    navigation.navigate('Send status')
-                }}>
-                update status
-            </Button> */}
 
             <Text>Your ID: {id}</Text>
             <Text style={styles.note}>Only share your ID with trusted people</Text>
