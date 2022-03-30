@@ -43,13 +43,13 @@ export default function MotionDetection() {
 
     }, [motionAvailable])
 
-    return (
-        <View style={styles.container}>
+    // return (
+    //     <View style={styles.container}>
 
-            <Text style={styles.text}>Activity: {data}</Text>
+    //         <Text style={styles.text}>Activity: {data}</Text>
 
-        </View>
-    );
+    //     </View>
+    // );
 }
 
 const styles = StyleSheet.create({

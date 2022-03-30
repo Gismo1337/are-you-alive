@@ -5,7 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { __handleStatusUpdate } from '../service/Firebase';
 import uuid from 'react-native-uuid';
 import { FontAwesome5 } from '@expo/vector-icons';
-import MotionDetection from "../components/MotionDetection.js";
+import BackgroundFetchScreen from "../components/BackgroundFetchScreen.js";
 
 export default function IamAlive() {
     // save the user message
@@ -199,7 +199,8 @@ export default function IamAlive() {
                     </Button>
             }
 
-            <MotionDetection />
+
+            <BackgroundFetchScreen />
 
         </View >
     );
